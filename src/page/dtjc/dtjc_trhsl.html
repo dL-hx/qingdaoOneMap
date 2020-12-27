@@ -1,0 +1,148 @@
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="styles/dtjc.css"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=2.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>青岛市绿色高产高效创建信息服务平台</title>
+    <script src="../_utils/config.js"></script>
+    <link rel="stylesheet" type="text/css" href="../global.css">
+    <script src="../../../vendors/jquery/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/dtjc.css">
+    <script src="../../../vendors/art-template/template-web.js"></script>
+    <!-- 引入 ECharts 文件 -->
+    <script src="../../../vendors/echarts/echarts-4.5.0.min.js"></script>
+    <script src="../_utils/utils.js"></script>
+    <script src="../_utils/template.js"></script>
+    <script src="../home/js/line_graph.js"></script>
+    <script src="../_utils/constants.js"></script>
+    <script src="../_utils/include.js"></script>
+
+</head>
+<body class="bg">
+<div id="header"></div>
+<div class="center w">
+    <div class="title">
+        <span>土壤含水量查询</span>
+    </div>
+
+    <div class="box">
+        <form id="form" class="search" style="display: block">
+    <span>区县：
+        <!--选择区县-->
+            <select id="city">
+                <option value="" selected="selected">--请选择--</option>
+			    <option value="370211">西海岸新区(3+0)</option>
+			    <option value="370281">胶州市(3+10)</option>
+			    <option value="370282">即墨市(3+0)</option>
+			    <option value="370283">平度市(2+2)</option>
+			    <option value="370285">莱西市(2+10)</option>
+            </select>
+          </span>
+            <!--选择地点-->
+            <span>地点：
+                <select name="wsid" id="town">
+     	                <option value="78">市属莱西市夏格庄镇金色五谷家庭农场</option>
+                </select>
+            </span>
+            <span id="time">
+              时间：
+               <input type="date" name="startTime" id="startTime">
+                <i>至</i>
+               <input type="date" name="endTime" id="endTime">
+          </span>
+            <button class="btn01" id="btn01" type="submit">
+                <img src="../../asset/search_icon.png">查询
+            </button>
+        </form>
+
+        <div style="width: 80%;height:340px;margin: 0 auto" id="chart"></div>
+
+        <div class="table_box" id="t3">
+            <table cellpadding="0" cellspacing="0" class="table">
+                <thead>
+                <tr>
+                    <td>接收时间</td>
+                    <td>10CM</td>
+                    <td>20CM</td>
+                    <td>40CM</td>
+                    <td>60CM</td>
+                </tr>
+                </thead>
+                <tbody id="tbody_box3">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="pageNum">
+            <ul id="page">
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!--导入底部-->
+<div id="footer"></div>
+
+<!-- 含水量表格模板 -->
+<script type="text/template" id="dtjcTpl3">
+    {{each data}}
+    <tr>
+        <td>{{$imports.formatDate($value.jcsj)}}</td>
+        <td>{{$value.trhsl}}  %</td>
+        <td>{{$value.trhsL2}} %</td>
+        <td>{{$value.trhsL3}} %</td>
+        <td>{{$value.trhsL4}} %</td>
+    </tr>
+    {{/each}}
+</script>
+
+<!-- 分页模板 -->
+<script type="text/template" id="pageTpl">
+    <li class="fiveword">总共({{total}})条</li>
+
+    <li class="twoword"><a href="javascript:" onclick="changePage({{1}})">首页</a></li>
+
+    {{if pageNow > 1}}
+    <li class="threeword"><a href="javascript:" onclick="changePage({{pageNow - 1}})">上一页</a></li>
+    {{/if}}
+
+    {{if(pageNow - 3 > 0)}}
+    <li><a href="javascript:" onclick="changePage({{pageNow - 3}})">{{pageNow - 3}}</a></li>
+    {{/if}}
+
+    {{if(pageNow - 2 > 0)}}
+    <li><a href="javascript:" onclick="changePage({{pageNow - 2}})">{{pageNow - 2}}</a></li>
+    {{/if}}
+
+    {{if(pageNow - 1 > 0)}}
+    <li><a href="javascript:" onclick="changePage({{pageNow - 1}})">{{pageNow - 1}}</a></li>
+    {{/if}}
+
+    <li class="curPage"><a href="javascript:" onclick="changePage({{pageNow}})">{{pageNow}}</a></li>
+
+    {{if(pageNow + 1 <= pageTotal)}}
+    <li><a href="javascript:" onclick="changePage({{pageNow + 1}})">{{pageNow + 1}}</a></li>
+    {{/if}}
+
+    {{if(pageNow + 2 <= pageTotal)}}
+    <li><a href="javascript:" onclick="changePage({{pageNow + 2}})">{{pageNow + 2}}</a></li>
+    {{/if}}
+
+    {{if pageNow < pageTotal}}
+    <li class="threeword"><a href="javascript:" onclick="changePage({{pageNow + 1}})">下一页</a></li>
+    {{/if}}
+
+    <li class="twoword"><a href="javascript:" onclick="changePage({{pageTotal}})">末页</a></li>
+
+    <li style="border: transparent;margin-top:3px;    display: flex;"><span style="color: #ffc900;">{{pageNow}}</span>/{{pageTotal}}
+    </li>
+</script>
+
+<script src="../_utils/district.js"></script>
+<script src="js/trhsl_graph.js"></script>
+<script src="_services/dtjc_index.js"></script>
+<script src="_models/dtjc_trhsl.js"></script>
+</body>
+</html>

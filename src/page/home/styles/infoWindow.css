@@ -1,0 +1,39 @@
+/*自定义信息窗体*/
+.infoWindow {
+    position: relative;
+    background-color: #ffffff;
+    padding: 10px;
+    width: 150px;
+    color: #000;
+    border-radius: 2px;
+}
+
+.infoWindow img {
+    float: right;
+    width: 10px;
+    height: 10px;
+}
+
+.infoWindow ul{
+    padding-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.infoWindow li span {
+    color:black;
+}
+
+
+/*小三角样式*/
+.triangle-down {
+    width: 0;
+    position: absolute;
+    bottom: -10px;
+    translate: inherit;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-top: 8px solid #fff;
+}

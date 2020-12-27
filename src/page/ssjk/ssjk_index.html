@@ -1,0 +1,191 @@
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=2.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>青岛市绿色高产高效创建信息服务平台</title>
+    <script src="../_utils/config.js"></script>
+    <link rel="stylesheet" type="text/css" href="../global.css">
+    <script src="../../../vendors/jquery/jquery-1.12.4.js"></script>
+    <script src="../../../vendors/art-template/template-web.js"></script>
+    <script src="../_utils/utils.js"></script>
+    <script src="../_utils/template.js"></script>
+    <script src="../_utils/constants.js"></script>
+    <script src="../_utils/include.js"></script>
+
+    <!--导入地图样式代码-->
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <!--导入地图插件代码-->
+    <script type="text/javascript"
+            src="https://webapi.amap.com/maps?v=1.4.15&key=6e63cf502ab8316e6e42b78b7f34cf40&plugin=AMap.DistrictSearch,AMap.ToolBar"></script>
+    <script src="http://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+
+    <script src="../_utils/carousel.js"></script>
+
+    <style type="text/css">
+        * {
+            box-sizing: inherit
+        }
+    </style>
+</head>
+
+<body class="bg">
+<div id="header"></div>
+<div class="center w" style="padding: 0 5%;width: 80%;">
+    <div class="title">
+        <span>实时监控</span>
+    </div>
+    <div style="text-align: right;margin-top: 30px;margin-right: 100px;"><span id="yuanqu"></span><span class="cjtime" id="caijitime"></span>
+    </div>
+    <div style="display:flex;justify-content:space-around;">
+        <div id="bmap" style="flex: 1 ;margin: 20px"></div>
+        <div style="flex: 1;margin:20px;">
+            <div>
+                <style>
+                    .slider {
+                        height: 258px;
+                        position: relative;
+                        overflow: hidden;
+                    }
+
+                    .slider li {
+                        position: absolute;
+                        display: none;
+                        margin-left: -30px; /*图片向左移动*/
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                    .slider li:first-child {
+                        display: block;
+                    }
+
+
+                    .arrow {
+                        display: none;
+                    }
+
+                    .slider:hover .arrow {
+                        display: block;
+                    }
+
+                    .arrow-left,
+                    .arrow-right {
+                        font-family: "SimSun", "宋体";
+                        width: 30px;
+                        height: 60px;
+                        background-color: rgba(0, 0, 0, 0.1);
+                        position: absolute;
+                        top: 50%;
+                        margin-top: -30px;
+                        cursor: pointer;
+                        text-align: center;
+                        line-height: 60px;
+                        color: #fff;
+                        font-weight: 700;
+                        font-size: 30px;
+                    }
+
+                    .arrow-left:hover,
+                    .arrow-right:hover {
+                        background-color: rgba(0, 0, 0, .5);
+                    }
+
+                    .arrow-left {
+                        left: 0;
+                    }
+
+                    .arrow-right {
+                        right: 0;
+                    }
+
+                    .caption {
+                        position: absolute;
+                        bottom: 0px;
+                        background: #000;
+                        background: rgba(0, 0, 0, .5);
+                        width: 100%;
+                        font-size: 14px;
+                        color: #fff;
+                        border-top: 1px solid #000;
+                        text-shadow: none;
+                        height: 40px;
+                        line-height: 40px;
+                    }
+                </style>
+                <div class="slider">
+                    <ul id="pic_box">
+                    </ul>
+                    <div class="arrow"><span class="arrow-left">&lt;</span> <span class="arrow-right">&gt;</span></div>
+                </div>
+            </div>
+
+            <table width="100%" border="0" cellspacing="10" cellpadding="0">
+                <tbody style="text-align: center">
+                <tr>
+                    <td style="color: black;padding: 30px 30px;"><img style="background-color: #21433f;" src="../../asset/table_icon01.png"> <span
+                            class="itemname">空气温度</span>
+                        <div><strong id="kqwd">0</strong><sub> ℃</sub></div>
+                    </td>
+                    <td style="color: black;padding: 30px 30px;"><img style="background-color: #21433f;" src="../../asset/table_icon02.png"> <span
+                            class="itemname">辐射</span>
+                        <div><strong id="fushe">0</strong><sub> W/m<sup>2</sup></sub></div>
+                    </td>
+                    <td style="color: black;padding: 30px 30px;"><img style="background-color: #21433f;" src="../../asset/table_icon03.png"> <span
+                            class="itemname">风速</span>
+                        <div><strong id="fengsu">0</strong><sub>m/s</sub></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color: black;padding: 30px 30px;"><img style="background-color: #21433f;" src="../../asset/table_icon04.png"> <span
+                            class="itemname">空气湿度</span>
+                        <div><strong id="kongqishidu">0</strong><sub> %</sub></div>
+                    </td>
+                    <td style="color: black;padding: 30px 30px;"><img style="background-color: #21433f;" src="../../asset/table_icon05.png"> <span
+                            class="itemname">降雨量</span>
+                        <div><strong id="jiangyuliang">0</strong><sub> mm</sub></div>
+                    </td>
+                    <td style="color: black;padding: 30px 30px;"><img style="background-color: #21433f;" src="../../asset/table_icon06.png"> <span
+                            class="itemname">风向</span>
+                        <div><strong id="fengxiang">0</strong></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--导入底部-->
+<div id="footer"></div>
+
+<!-- 图片预览模板 -->
+<script type="text/template" id="picTpl">
+    {{if (no_pic)}}
+    <li>
+        <a href="javascript:">
+            <img src='../../asset/none_pic.png' alt="" height="190px">
+        </a>
+    </li>
+    {{else}}
+    {{each data value}}
+    <li>
+        <a href="javascript:">
+            <img src="{{$imports.replaceText(value.tP_DZ,'../../asset/none_pic.png',null)}}" alt=""
+                 style="width:100%;height:100%;"
+            >
+            <div class="caption" style="bottom: 12px;">
+                <span>{{pName}}</span><span style="margin-left:5px">{{$imports.formatDate(value.tm)}}</span>
+            </div>
+        </a>
+    </li>
+    {{/each}}
+    {{/if}}
+</script>
+</body>
+
+<script type="text/javascript" src="map.js"></script>
+<script>
+    Ajax();
+</script>
+
+</html>

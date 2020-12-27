@@ -1,0 +1,76 @@
+<script>
+    $(function () {
+        utils.render(constants.root_path + '/settings-nav.html', '#settings-nav');
+        var nowurl = window.location.href;
+
+        function getParent($this) {
+            var selector = $this.attr('data-target');
+            return selector;
+        }
+
+        $('#menu li').each(function () {
+            const $this = $(this);
+            let $parent = getParent($this);
+            if (nowurl.indexOf($parent) > -1 && $parent != '') {
+                $this.addClass('selected');
+            } else {
+                $this.removeClass('selected');
+            }
+        });
+
+        //给导航栏绑定单击事件，处理页面跳转
+        $('#menu li').click(function () {
+            location.href = $(this).attr('href');
+        });
+    });
+</script>
+<nav class="navbar">
+    <div class="top">
+        <div class="logo"><img src="../../asset/logo.png"></div>
+        <div id="settings-nav"></div>
+    </div>
+    <div id="menu">
+        <ul>
+            <li data-target="home" href="../home/home.html">
+                <a href="../home/home.html">首页</a>
+            </li>
+            <li data-target="dtjc" href="../dtjc/dtjc_index.html">
+                <a href="../dtjc/dtjc_index.html">大田监测</a>
+                <dl class="children">
+                    <dd><a href="../dtjc/dtjc_index.html">数据分析</a></dd>
+                    <dd><a href="../dtjc/dtjc_jwcx.html">积温查询 </a></dd>
+                    <dd><a href="../dtjc/dtjc_jylcx.html">降雨量查询 </a></dd>
+                    <dd><a href="../dtjc/dtjc_trhsl.html">土壤含水量</a></dd>
+                </dl>
+            </li>
+            <li data-target="lssj" href="../lssj/lssj_index.html">
+                <a href="../lssj/lssj_index.html">历史数据</a>
+            </li>
+            <li data-target="tpll_s" href="../tpll_s/tpll_list.html">
+                <a href="../tpll_s/tpll_list.html">图片浏览</a>
+            </li>
+            <li data-target="ssjk" href="../ssjk/ssjk_index.html">
+                <a href="../ssjk/ssjk_index.html">设施监控</a>
+<!--                <dl class="children">
+                    <dd><a href="../ssjk/ssjk_index.html">实时监控</a></dd>
+                    <dd><a href="../ssjk/ssjk_sjcx.html">数据查询</a></dd>
+                    <dd><a href="../ssjk/ssjk_tpll.html">图片浏览</a></dd>
+                    <dd><a href="../ssjk/ssjk_trhsl.html">土壤含水量</a></dd>
+                    <dd><a href="../ssjk/ssjk_sszb.html">设施专报</a></dd>
+                </dl>-->
+            </li>
+
+            <li data-target='zxyb' href='../zxyb/zxyb_index.html'>
+                <a href='../zxyb/zxyb_index.html'>周旬月报</a>
+            </li>
+            <li data-target='hjyj' href='../hjyj/hjyj_index.html'>
+                <a href='../hjyj/hjyj_index.html'>环境预警</a>
+            </li>
+            <li data-target='nqfx' href='../nqfx/nqfx_index.html'>
+                <a href='../nqfx/nqfx_index.html'>农情分析</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+

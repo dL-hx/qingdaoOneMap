@@ -1,0 +1,212 @@
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=2.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>青岛市绿色高产高效创建信息服务平台</title>
+    <script src="../_utils/config.js"></script>
+    <link rel="stylesheet" type="text/css" href="../global.css">
+    <link rel="stylesheet" type="text/css" href="../zxyb/styles/zxyb.css">
+    <script src="../../../vendors/jquery/jquery-1.12.4.js"></script>
+    <script src="../../../vendors/art-template/template-web.js"></script>
+    <!-- 引入 ECharts 文件 -->
+    <script src="../../../vendors/echarts/echarts-4.5.0.min.js"></script>
+    <script src="../_utils/utils.js"></script>
+    <script src="../_utils/template.js"></script>
+    <script src="../_utils/constants.js"></script>
+    <script src="../_utils/include.js"></script>
+</head>
+
+<body class="bg">
+<div id="header"></div>
+<div class="center w">
+    <div class="title">
+        <span>设施专报</span>
+    </div>
+
+    <div class="box">
+        <form id="form" class="search" style="display: block">
+            <span>区县：
+            <select name="regionCode" id="city">
+                <option value="" selected="selected">--请选择--</option>
+			    <option value="370211">西海岸新区(3+0)</option>
+			    <option value="370281">胶州市(3+10)</option>
+			    <option value="370282">即墨市(3+0)</option>
+			    <option value="370283">平度市(2+2)</option>
+			    <option value="370285">莱西市(2+10)</option>
+            </select>
+          </span>
+
+            <span>地点：
+                <select name="wsid" id="town">
+                    	<option value="78">市属莱西市夏格庄镇金色五谷家庭农场</option>
+                </select>
+            </span>
+            <span id="time">
+              时间：
+               <input type="date" name="starttime" id="starttime">
+          </span>
+
+            <span>分析类型：
+				<select style="width: 80px; margin-right: 10px;" name="type" id="fxType">
+					<option value="1">周</option>
+					<option value="2">旬</option>
+					<option value="3" selected="selected">月</option>
+					<option value="4">年</option>
+				</select>
+				<select style="width: 80px;display: none" id="fxJt" name="subtype"></select>
+        </span>
+
+            <button class="btn01" id="btn01" type="submit">
+                <img src="../../asset/search_icon.png">查询
+            </button>
+
+            <button class="btn01" id="btn02" type="button" style="display: none">
+                <img src="../../asset/export_icon.png">导出
+            </button>
+
+            <button class="btn01" id="btn03" type="button" style="display: none">
+                <img src="../../asset/print_icon.png">打印
+            </button>
+        </form>
+        <div class="table_box">
+            <div class="table_title">
+                <p style="width: 100%;overflow: hidden;text-align: center;font-size: 16px;font-weight: bold;color: #555;margin-bottom: 20px;">
+                    <span id="starttimeText"></span> 青岛关键农情指标分析汇总表
+                </p>
+            </div>
+            <table cellpadding="0" cellspacing="0" class="table3">
+                <thead>
+                <tr>
+                    <td><img src="../../asset/table_icon01.png" alt="">空气温度</td>
+                    <td><img src="../../asset/table_icon02.png" alt="">降雨量</td>
+                    <td><img src="../../asset/table_icon01.png" alt="">土壤平均温度</td>
+                    <td><img src="../../asset/table_icon03.png" alt="">土壤相对湿度</td>
+                    <td><img src="../../asset/table_icon03.png" alt="">空气湿度</td>
+                    <td><img src="../../asset/table_icon04.png" alt="">风级</td>
+                </tr>
+                </thead>
+                <tbody id="zxyb_box">
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tj_box2">
+            <div class="tj_search"> <span>显示指标：
+              <input checked="checked" name="tbfs" type="radio" value="1">
+              月走势分析
+              <input name="tbfs" type="radio" value="2">
+              历年走势分析
+              <input name="tbfs" type="radio" value="3">
+              历年当月走势分析
+                <span>
+                    图表类型：
+                      <input checked="checked" name="tu" type="radio" value="1">
+                      折线图
+                      <input name="tu" type="radio" value="2">
+                      柱状图
+                </span>
+              <div class="tj_btn">
+                  <span>
+                    <button class="btn01" type="button" onclick="getTx();">
+                    <img src="../../asset/search_icon.png">查询</button>
+                </span>
+              </div>
+              </span>
+            </div>
+            <div id="chart" class="tj_box"></div>
+        </div>
+    </div>
+</div>
+<!--导入底部-->
+<div id="footer"></div>
+
+<!-- 表格模板 -->
+<script type="text/template" id="zxybTpl">
+    <tr>
+        <td>{{data[0].kqwd}}℃</td>
+        <td>{{data[0].jyl}}mm</td>
+        <td>{{data[0].trwd}}℃</td>
+        <td>{{data[0].trhsl}}%</td>
+        <td>{{data[0].kqsd}}%</td>
+        <td>{{data[0].gz}}</td>
+    </tr>
+    <tr>
+        <td>去年空气温度</td>
+        <td>去年降雨量</td>
+        <td>去年土壤平均温度</td>
+        <td>土壤相对湿度20cm</td>
+        <td>去年空气湿度</td>
+        <td>昼夜温差</td>
+    </tr>
+    <tr>
+        <td>{{data[1].kqwd}}℃</td>
+        <td>{{data[1].jyl}}mm</td>
+        <td>{{data[1].trwd}}℃</td>
+        <td>{{data[1].trhsl}}%</td>
+        <td>{{data[1].kqsd}}%</td>
+        <td>{{data[1].gz}}</td>
+    </tr>
+    <tr>
+        <td>较去年同期变化</td>
+        <td>较去年同期变化</td>
+        <td>较去年同期变化</td>
+        <td>土壤相对湿度40cm</td>
+        <td>较去年同期变化</td>
+        <td>辐射</td>
+    </tr>
+    <tr>
+        <td>{{data[2].kqwd}}℃</td>
+        <td>{{data[2].jyl}}mm</td>
+        <td>{{data[2].trwd}}℃</td>
+        <td>{{data[2].trhsl}}%</td>
+        <td>{{data[2].kqsd}}%</td>
+        <td>{{data[2].gz}}%</td>
+    </tr>
+    <tr>
+        <td>{{dt}}极端高温</td>
+        <td>{{dt}}极端最大降雨量</td>
+        <td>{{dt}}极端高值</td>
+        <td>土壤相对湿度60cm</td>
+        <td>{{dt}}极端湿度</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>{{data[3].kqwd}}℃</td>
+        <td>{{data[3].jyl}}mm</td>
+        <td>{{data[3].trwd}}℃</td>
+        <td>{{data[3].trhsl}}%</td>
+        <td>{{data[3].kqsd}}%</td>
+        <td>{{data[3].gz}}</td>
+    </tr>
+    <tr>
+        <td>{{dt}}极端低温</td>
+        <td>{{dt}}极端最小降雨量</td>
+        <td>{{dt}}极端低值</td>
+        <td></td>
+        <td>{{dt}}极端湿度</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>{{data[4].kqwd}}℃</td>
+        <td>{{data[4].jyl}}mm</td>
+        <td>{{data[4].trwd}}℃</td>
+        <td>{{data[4].trhsl}}%</td>
+        <td>{{data[4].kqsd}}%</td>
+        <td>{{data[4].gz}}</td>
+    </tr>
+</script>
+
+
+<script src="../_utils/district.js"></script>
+<script src="../zxyb/js/line_graph.js"></script>
+<script src="../zxyb/js/zxyb_index.js"></script>
+
+<script src="../zxyb/_service/zxyb_index.js"></script>
+<script src="../zxyb/_models/zxyb_index.js"></script>
+<script>
+    getTx()
+</script>
+</body>
+</html>

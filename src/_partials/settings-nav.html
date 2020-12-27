@@ -1,0 +1,12 @@
+<script>
+    $('#loginout').on('click', function () {
+        utils.ajax('/api/Account/SignOut',{},'post' ,function (data) {
+            window.location.href = '../login/login.html'
+        })
+    })
+</script>
+<div class="dl">
+    <a id="loginout">
+        <img src="../../asset/login_icon.png" width="32px" align="center">退出
+    </a>
+</div>

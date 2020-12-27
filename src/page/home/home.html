@@ -1,0 +1,471 @@
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=2.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>青岛市绿色高产高效创建信息服务平台</title>
+    <script src="../_utils/config.js"></script>
+    <link rel="stylesheet" type="text/css" href="../global.css">
+    <link rel="stylesheet" type="text/css" href="styles/home.css">
+    <link rel="stylesheet" type="text/css" href="styles/infoWindow.css">
+    <!--导入地图插件代码-->
+    <script type="text/javascript"
+            src="https://webapi.amap.com/maps?v=1.4.15&key=6e63cf502ab8316e6e42b78b7f34cf40&plugin=AMap.DistrictSearch,AMap.ToolBar"></script>
+    <script src="http://webapi.amap.com/ui/1.0/main.js?v=1.0.11"></script>
+    <script src="../../../vendors/jquery/jquery-1.12.4.js"></script>
+    <script src="../../../vendors/art-template/template-web.js"></script>
+    <!-- 引入 ECharts 文件 -->
+    <script src="../../../vendors/echarts/echarts-4.5.0.min.js"></script>
+    <script src="../_utils/utils.js"></script>
+    <script src="../_utils/template.js"></script>
+    <script src="../_utils/constants.js"></script>
+    <script src="../_utils/include.js"></script>
+    <script src="../_utils/carousel.js"></script>
+</head>
+
+<body class="bg bghome">
+<!--导入头部-->
+<div id="header"></div>
+<div class="center" style="display: flex;justify-content: space-between;">
+    <div class="box01" style="margin: 0px;">
+        <div class="aleft">
+            <div class="leftnar">
+                <div class="left01"></div>
+                <div class="leftnar02">
+                    <div class="text01">
+                        <div>
+                            <h3 id="sqjc_count"></h3>
+                            <b class="nartai1">台</b></div>
+                        <div style="display: flex;flex-direction: column;"> <span>
+              <h4>市</h4>
+              <b style="margin-left: 10px;" id="sqjc_city"></b> <b>台</b> </span> <span>
+              <h4 id="border-red">区</h4>
+              <b style="margin-left: 10px;" id="sqjc_area"></b> <b>台</b> </span></div>
+                    </div>
+                </div>
+                <div class="leftnar03"></div>
+            </div>
+        </div>
+        <div class="acenter">
+            <div class="left04"></div>
+            <div class="leftnar02">
+                <div class="text01">
+                    <p><!--<b>共</b>-->
+                    <h3 id="sjcj_count"></h3>
+                    <b class="nartai">条</b>
+                    </p>
+                    <div style="display: flex;flex-direction: column"> <span>
+            <h4>市</h4>
+            <b style="margin-left: 10px;" id="sjcj_city"> </b> <b>条</b> </span> <span>
+            <h4 id="border-red">区</h4>
+            <b style="margin-left: 10px;" id="sjcj_area"> </b> <b>条</b> </span></div>
+                </div>
+            </div>
+            <div class="leftnar03"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="cright">
+            <div class="left05"></div>
+            <!--            Video Start-->
+            <div class="right02" style="display: flex;align-items: center;justify-content: center;height: 299px"
+                 id="spjc_video"><img style="width: 190px;" src="../../asset/none_video.png"/></div>
+            <!--            Video End-->
+
+            <script>
+                $(function () {
+
+                    var count = 0;
+
+                    $('.arrow-right').click(function () {
+                        count++;
+
+                        if (count == $('.slider li').length) {
+                            count = 0;
+                        }
+                        //让count渐渐的显示，其他兄弟渐渐的隐藏
+                        $('.slider li').eq(count).fadeIn().siblings('li').fadeOut();
+                    });
+
+                    $('.arrow-left').click(function () {
+                        count--;
+
+                        if (count == -1) {
+                            count = $('.slider li').length - 1;
+                        }
+                        //让count渐渐的显示，其他兄弟渐渐的隐藏
+                        $('.slider li').eq(count).fadeIn().siblings('li').fadeOut();
+                    });
+
+                });
+            </script>
+            <div class="right03" style="height: 24px"></div>
+        </div>
+
+
+    </div>
+
+    <!--        实时数据Start-->
+    <div class="box02" style="color: #ccc; background-color: #181818; margin: 0px;">
+        <div class="btop">
+            <div class="bbox01"></div>
+            <div class="bbox02" id="bare02">
+                <p><img src="../../../img/box01.png">
+                <div class="sjcj">
+                    <h5 class="sbName">*</h5>
+                    <div><span>采集时间：</span><span id="jcsj"> * </span></div>
+                </div>
+                </p>
+                <br>
+                <div class="clear"></div>
+                <table width="48%" border="0" cellspacing="10" cellpadding="0" >
+                    <tbody id="sssj_box">
+                    <tr>
+                        <td><img src="../../../img/data_icon01.png"> <span class="itemname">空气温度</span>
+                            <div><strong id="kqwd">*</strong><sub> ℃</sub></div>
+                        </td>
+                        <td><img src="../../../img/data_icon02.png"> <span class="itemname">辐射</span>
+                            <div><strong id="gz">*</strong><sub> W/m</sub></div>
+                        </td>
+                        <td><img src="../../../img/data_icon03.png"> <span class="itemname">风速</span>
+                            <div><strong id="fs">*</strong><sub>m/s</sub></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="../../../img/data_icon04.png"> <span class="itemname">空气湿度</span>
+                            <div><strong id="kqsd">*</strong><sub> %</sub></div>
+                        </td>
+                        <td><img src="../../../img/data_icon05.png"> <span class="itemname">降雨量</span>
+                            <div><strong id="jyl">*</strong><sub> mm</sub></div>
+                        </td>
+                        <td><img src="../../../img/data_icon06.png"> <span class="itemname">风向</span>
+                            <div><strong id="fx">*</strong></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <img class="line" src="../../../img/line.png">
+                <table width="45%" border="0" cellspacing="10" cellpadding="0" class="icondata">
+                    <tr>
+                        <td>土壤深度</td>
+                        <td>10cm</td>
+                        <td>20cm</td>
+                        <td>30cm</td>
+                        <td>40cm</td>
+                    </tr>
+                    <tr>
+                        <td>土壤温度 ℃</td>
+                        <td id="trwd">*</td>
+                        <td id="trwD2">*</td>
+                        <td id="trwD3">*</td>
+                        <td id="trwD4">*</td>
+                    </tr>
+                    <tr>
+                        <td>土壤湿度 %</td>
+                        <td id="trhsl">*</td>
+                        <td id="trhsL2">*</td>
+                        <td id="trhsL3">*</td>
+                        <td id="trhsL4">*</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="bbox03"></div>
+        </div>
+        <!--        实时数据End-->
+
+        <div class="bmap" id="bmap"></div>
+    </div>
+    <div class="box03" id="bare03">
+        <ul id="tabs" style="overflow: hidden;	margin: 0;padding: 0;display: flex;">
+            <li><a href="#" class="tb1" name="#tab1" style="width: 128px;"></a></li>
+            <li><a style="width: 302px;" href="#" class="tb2" name="#tab2"
+                   style="width: 280px!important; background-position-x: 15px!important;"></a></li>
+        </ul>
+        <div id="content">
+            <div id="tab1">
+                <h5
+                    style="color:#ccc;text-align: right;padding: 10px;border-left:2px solid #365f50;border-right:2px solid #365f50;">
+                </h5>
+                <div class="left02">
+                    <div>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="orchardlist atltable">
+                            <tr>
+                                <th style="text-align: left;padding-left: 10px;">报告名称</th>
+                                <th>发布时间</th>
+                            </tr>
+                            <tbody id="nqfx_box">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="right03"></div>
+            </div>
+            <div id="tab2">
+                <h5 class="sbName"
+                    style="color:#ccc;text-align: right;padding: 10px;border-left:2px solid #365f50;border-right:2px solid #365f50;">
+                    西海岸新区泊里镇米家庄</h5>
+                <!--                环境预警 Start-->
+                <div class="right02">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="orchardlist">
+                        <tr>
+                            <th>预警时间</th>
+                            <th>作物</th>
+                            <th>生育期</th>
+                            <th>温度预警</th>
+                            <th>含水量预警</th>
+                        </tr>
+                        <tbody id="hjyj_box"></tbody>
+                    </table>
+                </div>
+                <!--                环境预警 End-->
+
+                <div class="right03"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!--        图片预览Start-->
+        <div class="cright">
+            <div class="left07"></div>
+            <div class="right02" style="height: 235px;">
+                <style>
+                    .slider {
+                        height: 258px;
+                        position: relative;
+                        overflow: hidden;
+                    }
+                    .slider li {
+                        position: absolute;
+                        display: none;
+                        margin-left: -30px; /*图片向左移动*/
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                    .slider li:first-child {
+                        display: block;
+                    }
+
+
+                    .arrow {
+                        display: none;
+                    }
+
+                    .slider:hover .arrow {
+                        display: block;
+                    }
+
+                    .arrow-left,
+                    .arrow-right {
+                        font-family: "SimSun", "宋体";
+                        width: 30px;
+                        height: 60px;
+                        background-color: rgba(0, 0, 0, 0.1);
+                        position: absolute;
+                        top: 50%;
+                        margin-top: -30px;
+                        cursor: pointer;
+                        text-align: center;
+                        line-height: 60px;
+                        color: #fff;
+                        font-weight: 700;
+                        font-size: 30px;
+                    }
+
+                    .arrow-left:hover,
+                    .arrow-right:hover {
+                        background-color: rgba(0, 0, 0, .5);
+                    }
+
+                    .arrow-left {
+                        left: 0;
+                    }
+
+                    .arrow-right {
+                        right: 0;
+                    }
+
+                    .caption {
+                        position: absolute;
+                        bottom: 20px;
+                        background: #000;
+                        background: rgba(0, 0, 0, .5);
+                        width: 100%;
+                        font-size: 14px;
+                        color: #fff;
+                        border-top: 1px solid #000;
+                        text-shadow: none;
+                        height: 40px;
+                        line-height: 40px;
+						margin-bottom:28px;
+                    }
+                </style>
+                <div class="slider">
+                    <ul id="pic_box">
+                    </ul>
+                    <div class="arrow"><span class="arrow-left">&lt;</span> <span class="arrow-right">&gt;</span></div>
+                </div>
+            </div>
+            <div class="right03" style="height: 22px"></div>
+        </div>
+        <!--        图片预览End-->
+    </div>
+</div>
+<div class="clear"></div>
+<div class="bottom">
+    <div class="cright01" id="bianju">
+        <div class="left08">
+            <div>
+                <h5 style="margin-left:125px;" class="sbName">市属张家楼基地</h5>
+            </div>
+        </div>
+        <div class="left09 date">
+            <table width="100%" height="185px" border="0" cellspacing="0" cellpadding="0" class=" paralist">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th><img src="../../../img/data_icon01.png">空气温度</th>
+                    <th><img src="../../../img/data_icon02.png">降雨量</th>
+                    <th><img src="../../../img/data_icon03.png">土壤平均温度</th>
+                    <th><img src="../../../img/data_icon04.png">土壤相对湿度</th>
+                    <th><img src="../../../img/data_icon05.png">空气湿度</th>
+                    <th><img src="../../../img/data_icon06.png">辐射</th>
+                </tr>
+                </thead>
+
+                <tbody id="ndfx_box">
+                <tr class="blank">
+                    <td></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="left10"></div>
+    </div>
+
+    <!-- 农情变化趋势Start-->
+    <div class="cright01">
+        <div class="left11">
+            <div>
+                <h5 style="margin-left:165px;" class="sbName">市属张家楼基地</h5>
+            </div>
+        </div>
+        <div class="left09">
+            <div style="width: 80%;height:185px;margin: 0 auto;" id="chart"></div>
+        </div>
+        <div class="left10"></div>
+    </div>
+    <div class="clear"></div>
+
+    <!-- 农情变化趋势End-->
+
+    <!--导入底部-->
+    <span style="width: 100%;color: #fff;text-align: center;display: flex;justify-content: center;padding:0;margin-top: 15px;font-size: 1.17em;font-weight: bold;">
+  技术支持：西安微媒软件有限公司
+  </span>
+</div>
+<!-- 农情分析表格模板 -->
+<script type="text/template" id="nqfxTpl">
+    {{each data}}
+    <tr>
+        <td>{{$value.name}}</td>
+        <td>{{$imports.formatDateToYear($value.fbtime)}}</td>
+    </tr>
+    {{/each}}
+</script>
+
+<!-- 环境预警表格模板 -->
+<script type="text/template" id="hjyjTpl">
+    {{each data}}
+    <tr>
+        <td>{{$imports.formatDate($value.jcsj)}}</td>
+        <td>{{$value.zwName}}</td>
+        <td>{{$value.sysq}}</td>
+        <td>{{$value.yjyb}}</td>
+        <td>{{$value.hsl}}</td>
+    </tr>
+    {{/each}}
+</script>
+
+<!-- 年度分析表格模板 -->
+<script type="text/template" id="ndfxTpl">
+    <tr class="blank">
+        <td></td>
+    </tr>
+    <tr class="odd">
+        <td id="fcolor">今年</td>
+        <td>{{data[0].kqwd}}℃</td>
+        <td>{{data[0].jyl}}mm</td>
+        <td>{{data[0].trwd}}℃</td>
+        <td>{{data[0].trhsl}}%</td>
+        <td>{{data[0].kqsd}}%</td>
+        <td>{{data[0].gz}}W/m2</td>
+    </tr>
+    <tr>
+        <td id="fcolor">去年</td>
+        <td>{{data[1].kqwd}}℃</td>
+        <td>{{data[1].jyl}}mm</td>
+        <td>{{data[1].trwd}}℃</td>
+        <td class="t"><span>20cm</span> {{data[1].trhsl}}%</td>
+        <td>{{data[1].kqsd}}%</td>
+        <td>{{data[1].gz}}W/m2</td>
+    </tr>
+    <tr class="odd">
+        <td id="fcolor">较去年同期变化</td>
+        <td>{{data[2].kqwd}}%</td>
+        <td>{{data[2].jyl}}mm</td>
+        <td>{{data[2].trwd}}℃</td>
+        <td class="t"><span>40cm</span> {{data[2].trhsl}}%</td>
+        <td>{{data[2].kqsd}}%</td>
+        <td>{{data[2].gz}}%</td>
+    </tr>
+    <tr>
+        <td id="fcolor">年极端（高）</td>
+        <td>{{data[3].kqwd}}℃</td>
+        <td>{{data[3].jyl}}mm</td>
+        <td>{{data[3].trwd}}℃</td>
+        <td class="t"><span>60cm</span> {{data[3].trhsl}}%</td>
+        <td>{{data[3].kqsd}}%</td>
+        <td>{{data[3].gz}}W/m2</td>
+    </tr>
+    <tr class="odd">
+        <td id="fcolor">年极端（低）</td>
+        <td>{{data[4].kqwd}}℃</td>
+        <td>{{data[4].jyl}}mm</td>
+        <td>{{data[4].trwd}}℃</td>
+        <td>{{data[4].trhsl}}%</td>
+        <td>{{data[4].kqsd}}%</td>
+        <td>{{data[4].gz}}W/m2</td>
+    </tr>
+</script>
+<!-- 图片预览模板 -->
+<script type="text/template" id="picTpl">
+    {{if (no_pic)}}
+    <li>
+        <a href="javascript:">
+            <img src='../../asset/none_pic.png' alt="" height="190px">
+        </a>
+    </li>
+    {{else}}
+    {{each data value}}
+    <li>
+        <a href="javascript:">
+            <img src="{{$imports.replaceText(value.tP_DZ,'../../asset/none_pic.png',null)}}" alt=""
+                 style="width:100%;height:84%;">
+            <div class="caption" style="bottom: 12px;">
+                <span>{{pName}}</span><span style="margin-left:5px">{{$imports.formatDate(value.tm)}}</span>
+            </div>
+        </a>
+    </li>
+    {{/each}}
+    {{/if}}
+</script>
+
+<!--切换页签-->
+<script src="js/changeTabs.js"></script>
+
+<script type="text/javascript" src="js/bmap.js"></script>
+<script src="js/line_graph.js"></script>
+<script src="_service/home.js"></script>
+<script src="_models/home.js"></script>
+</body>
+</html>

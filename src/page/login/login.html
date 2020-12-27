@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>欢迎登录青岛绿色高产高效创建信息平台</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="../_utils/config.js"></script>
+    <script src="../../../vendors/jquery/jquery-1.12.4.js"></script>
+    <script src="../../../vendors/md5/md5.js"></script>
+    <script src="../_utils/utils.js"></script>
+    <script src="../default.js"></script>
+</head>
+<body>
+<div class="header"><h2>青岛市绿色高产高效创建信息平台</h2></div>
+<div class="dowebok">
+    <div class="logo">欢迎登录</div>
+    <form id="form">
+        <div id="J_Message" class="login-msg error">
+            <img src="images/pass.png" alt="">
+            <p class="error"></p>
+        </div>
+        <div class="form-item">
+            <input id="username" name="account" type="text" autocomplete="off" placeholder="用户名">
+        </div>
+        <div class="form-item">
+            <input id="password" name="password" type="password" autocomplete="off" placeholder="登录密码">
+        </div>
+
+        <div class="form-item">
+            <input id="code" name="code" type="text" autocomplete="off" placeholder="验证码"> <img id="imgCode">
+        </div>
+        <div class="form-item">
+            <button id="submit" type="submit">登 录</button>
+        </div>
+        <!--    <div class="reg-bar"> <a class="reg" href="javascript:">立即注册</a> <a class="forget" href="javascript:">忘记密码</a> </div>-->
+    </form>
+</div>
+<script src="js/login.js"></script>
+</body>
+</html>

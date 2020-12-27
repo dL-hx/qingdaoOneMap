@@ -1,0 +1,407 @@
+.bghome{
+    background-size:1920px 101%;
+}
+
+.acenter{
+    width:200px;
+    float:left;
+    margin-top:-10px;
+}
+.leftnar {
+    width:200px;
+    float:left;
+    margin-right:15px;
+}
+
+.box01, .box02 {
+    float: left;
+    margin-right: 20px;
+    position: relative;
+    color: #fff;
+}
+
+.box03 {
+    float: right;
+    position: relative;
+    top: 0;
+}
+
+.left01 {
+    width: 200px;
+    height: 44px;
+    background: url(../../../../img/sqjcz.png) no-repeat top center;
+}
+
+.left02 {
+    border-left: 2px #365f50 solid;
+    border-right: 2px #365f50 solid;
+    min-height:130px;
+    padding:0 10px;
+    margin:0;
+}
+.leftnar02 {
+    border-left: 2px #365f50 solid;
+    border-right: 2px #365f50 solid;
+    min-height:80px;
+    padding:0;
+    margin:0;
+}
+
+.leftnar02 .text01{
+    width:100%;
+    padding-top:10px;
+    text-align: left;
+    margin:0 auto;
+}
+
+.right02 {
+    border-left: 2px #365f50 solid;
+    border-right: 2px #365f50 solid;
+    padding: 0 10px;
+}
+
+
+.right03 {
+    width: auto;
+    height: 33px;
+    background: url(../../../../img/box_bottom02.png) no-repeat bottom right;
+    border-left: 2px solid #365f50;
+}
+
+.text01 p{
+    margin:0;
+    padding:0;
+    width:100%;
+}
+
+.left02 span,.leftnar02 span {
+    width:auto;
+    margin:0px 5px 4px 25px ;
+}
+.left02 span b,.leftnar02 span b{
+    width:auto;
+    font-weight:100;
+}
+.left02 span h4,.leftnar02 span h4{
+    float:left;
+    text-align: center;
+}
+.text01 {
+    margin-top: 0px;
+    float: left;
+    text-align: center;
+}
+
+.nartai {
+    margin: 5px 5px 0 5px;
+    position:absolute;
+    right:20px;
+    top:60px;
+}.nartai1 {
+     margin: 5px 5px 0 5px;
+     position:absolute;
+     left:120px;
+     top:55px;
+ }
+
+.left02 h3,.leftnar02 h3 {
+    line-height: 20px;
+    text-align: center;
+    font-size: 30px;
+    font-family:  Franklin Gothic Bolder, Arial Black," sans-serif";
+    color: #00f1e1;
+    margin: 0 0 18px -20px;
+}
+.leftnar02 h3 {
+    position:relative;
+}
+
+.left02 h4,.leftnar02 h4 {
+    width:30px;
+    border: 2px #0c4c78 solid;
+    border-radius: 6px;
+    padding: 3px 0 3px 0;
+    font-size:12px;
+    clear:both;
+	 font-weight: 200;
+}
+
+#border-red {
+    border: 2px #710c8b solid;
+}
+
+.leftnar03 {
+    height: 30px;
+    margin:0;
+    padding:0;
+    background: url(../../../../img/box_bottom.png) no-repeat bottom right;
+    border-left:2px #365f50 solid;
+}
+
+.left04 {
+    width: 200px;
+    height: 44px;
+    background: url(../../../../img/sjcjl.png) no-repeat top center;
+    margin-top: 10px;
+}
+
+.left05 {
+    width: 415px;
+    height: 44px;
+    background: url(../../../../img/shipin.png) no-repeat top center;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.left05 h5, .left06 h5, .left08 h5, .left11 h5 {
+    float: left;
+    padding-top: 25px;
+    margin-left: 150px;
+    color: #ccc;
+    font-size: 12px;
+}
+
+.atltable td {
+    height: 36px;
+    line-height: 36px;
+    font-size: 13px;
+}
+
+.atltable td:nth-child(2n+1) {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.orchardlist {
+    font-size: 14px;
+    text-align: center;
+}
+
+.orchardlist th {
+    height: 38px;
+    line-height: 38px;
+    color: #fff;
+    background-color: rgba(53, 96, 81, 0.2);
+}
+
+.orchardlist tbody tr:nth-child(odd){ /*隔行换色*/
+    background-color: rgba(53, 96, 81, 0.2);
+    color: #eee;
+}
+
+
+.orchardlist td {
+    color: #eee;
+    height: 40px;
+    line-height: 40px;
+}
+
+.bbox01 {
+    width: 18px;
+    height: 136px;
+    background: url(../../../../img/bbox01.png) no-repeat top center;
+    float: left;
+    color: #fff;
+}
+
+.bbox02 {
+    width: 770px;
+    height: 132px;
+    border-top:2px solid #2e4c41;
+	border-bottom:2px solid #2e4c41;
+    float: left;
+    background-color: none;
+	padding-left:30px;
+}
+
+.bbox02 table {
+    margin-top: 5px;
+    float: left;
+    font-size:12px;
+}
+
+.bbox02 table img {
+    width: 24px;
+    float: left;margin-right:5px;
+}
+
+.bbox02 .line {
+    width: 2px;
+    height: 50%;
+    float: left;
+    margin-right:15px;
+}
+
+.icondata {
+    margin-left:15px;
+}
+.icondata td{padding-bottom:6px;}
+
+.bbox02 p {
+    float: left;
+    text-align: left;
+    margin-left: 0px;
+}
+
+.sjcj h5 {
+    float: left;
+    margin-top: 20px;
+
+}
+
+.sjcj div {
+    float: right;
+}
+
+.sjcj span {
+    float: left;
+    wdith: 200px;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #33b5b0;
+}
+
+.bbox03 {
+    width: 18px;
+    height: 136px;
+    background: url(../../../../img/bbox03.png) no-repeat top center;
+    float: left;
+    padding:0;
+    margin:0;
+}
+
+.btop {
+    position: static;
+    text-align: left;
+}
+
+.bmap {
+	position: absolute;
+	top: 136px;
+	text-align: center;
+	width: 100%;
+	height: 430px;
+}
+
+.cright {
+    float: left;
+
+}
+
+.left07 {
+    width: 460px;
+    height: 44px;
+    background: url(../../../../img/tpyl.png) no-repeat top left;
+    margin-top: 10px;
+}
+
+.left08 {
+    width: 866px;
+    height: 48px;
+    background: url(../../../../img/ndfx.png) no-repeat top center;
+    margin-top: 10px;
+}
+
+.left09 {
+    border-left: 2px #365f50 solid;
+    border-right: 2px #365f50 solid;
+    padding: 0 10px 0 10px;
+    text-align: center;
+}
+
+.date table {
+    mpadding-top: 10px;
+}
+
+.date img {
+    width: 24px;
+    height: 24px;
+    float: left;
+}
+
+.paralist {
+    text-align: center;
+}
+
+.paralist th {
+    color: #fff;
+    background-color: rgba(53, 96, 81, 0.3);
+    font-weight: normal;
+    padding: 4px 0;
+    text-align: left;
+    line-height: 30px;
+}
+
+.paralist td {
+    height: 28px;
+    line-height: 28px;
+    color: #ffffff;
+}
+
+.paralist .odd td {
+    background-color: rgba(53, 96, 81, 0.2);
+}
+
+.paralist .blank td {
+    height: 7px;
+}
+
+.paralist span {
+    color: red;
+    font-size: 12px;
+}
+
+.paralist .t {
+    line-height: 20px;
+}
+
+.paralist img {
+    display: block;
+    margin: 0 auto 5px;
+}
+
+#fcolor {
+    color: #04cabd;
+    background-color: #181818;
+}
+
+.left10 {
+    width: 866px;
+    height: 32px;
+    background: url(../../../../img/cbox03.png) no-repeat top center;
+}
+
+.left11 {
+    width: 866px;
+    height: 48px;
+    background: url(../../../../img/nqbhqs.png) no-repeat top center;
+    margin-top:10px;
+}
+
+.clear {
+    clear: both;
+}
+
+.bottom {
+    margin: 20px 0px 20px 80px;
+    width: 91.4%;
+    text-align: left;
+    z-index: 20;
+    position: relative;
+    bottom: 50px;
+    left:0;
+}
+
+.cright01 {
+    margin-right: 0;
+    padding: 0;
+    float: left;
+    z-index: 3;
+    margin-top:0;
+}
+
+#bianju {
+    margin-right: 20px;
+    margin-top:0;
+    padding:0;
+}

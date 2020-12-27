@@ -1,0 +1,201 @@
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=2.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>青岛市绿色高产高效创建信息服务平台</title>
+    <script src="../_utils/config.js"></script>
+    <link rel="stylesheet" type="text/css" href="../global.css">
+    <script src="../../../vendors/jquery/jquery-1.12.4.js"></script>
+    <script src="../../../vendors/art-template/template-web.js"></script>
+    <!-- 引入 ECharts 文件 -->
+    <script src="../../../vendors/echarts/echarts-4.5.0.min.js"></script>
+    <script src="../_utils/utils.js"></script>
+    <script src="../_utils/template.js"></script>
+    <script src="../home/js/line_graph.js"></script>
+    <script src="../_utils/constants.js"></script>
+    <script src="../_utils/include.js"></script>
+
+</head>
+<style>
+	.search{
+		display:block;
+	}
+    .search span {
+        margin: 0 10px auto;
+        text-align: center;
+        overflow: hidden;
+    }
+    
+    .search span i {
+        color: #b4b3b3;
+        font-style: normal;
+    }
+    
+    .search input {
+        border: 1px solid #d6d6d6;
+        color: #999;
+        font-size: 12px;
+        height: 26px;
+        padding-left: 10px;
+        border-radius: 3px;
+    }
+    
+    .search select {
+        border: 1px solid #d6d6d6;
+        color: #999;
+        font-size: 12px;
+        height: 28px;
+        width: 150px;
+        padding-left: 10px;
+        border-radius: 3px;
+    }
+.nq_box {
+	width: 100%;
+	overflow: hidden;
+	margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.nq {
+	/* float: left; */
+    width: calc(40% - 30px);
+	overflow: hidden;
+	height: 110px;
+	margin-bottom: 20px;
+}
+
+.nq_icon {
+	width: 110px;
+	height: 90px;
+	padding-top: 20px;
+	float: left;
+	border-right: 1px #ddd solid;
+	position: relative
+}
+.nq_icon input {
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.nq_icon img {
+	display: block;
+	margin: auto;
+	opacity: 0.7;
+}
+.nq_main {
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+	margin-left: 20px;
+	width: 469px;
+	padding-left: 20px;
+    height: 110px;
+}
+.nq_main p:nth-child(1) {
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+}
+.nq_main p{
+    color: #888;
+    font-size: 16px;
+}
+
+</style>
+<body class="bg">
+<div id="header"></div>
+<div class="center w">
+    <div class="title">
+        <span>农情分析报告</span>
+    </div>
+    <form id="form" class="search">
+        <span>
+            标题：
+            <input type="text" name="Name">
+        </span>
+        <span id="time">
+        时间：
+        <input type="date" name="StartFBTIME">
+            <i>至</i>
+        <input type="date" name="EndFBTIME">
+        </span>
+        <button class="btn01" id="btn01" type="submit">
+            <img src="../../asset/search_icon.png">查询
+        </button>
+    </form>
+    <div class="nq_box" style="padding-top: 15px;" id="nq_box"></div>
+    <div class="pageNum">
+        <ul id="page">
+
+        </ul>
+    </div>
+</div>
+<!--导入底部-->
+<div id="footer"></div>
+<script type="text/template" id="nqfxTpl">
+    {{each data}}
+    <a href="nqfx_detail.html?id={{$value.id}}" onclick="onClick({{$value.id}})">
+        <div class="nq">
+          <div class="nq_icon"><img src="../../asset/nq_icon01.png" alt=""></div>
+          <div class="nq_main">
+            <p>{{$value.name}}</p>
+            <p>发布时间：{{$imports.formatDateToYear($value.fbtime)}}</p>
+            <p>文章来源：{{$value.fbname}}</p>
+            <p>访问量：{{$value.fwl}}</p>
+          </div>
+          </a>
+         </div>
+        </a>
+    {{/each}}
+</script>
+<!-- 分页模板 -->
+<script type="text/template" id="pageTpl">
+<li class="fiveword">总共({{total}})条</li>
+
+<li class="twoword"><a href="javascript:" onclick="changePage({{1}})">首页</a></li>
+
+{{if pageNow > 1}}
+<li class="threeword"><a href="javascript:" onclick="changePage({{pageNow - 1}})">上一页</a></li>
+{{/if}}
+
+{{if(pageNow - 3 > 0)}}
+<li><a href="javascript:" onclick="changePage({{pageNow - 3}})">{{pageNow - 3}}</a></li>
+{{/if}}
+
+{{if(pageNow - 2 > 0)}}
+<li><a href="javascript:" onclick="changePage({{pageNow - 2}})">{{pageNow - 2}}</a></li>
+{{/if}}
+
+{{if(pageNow - 1 > 0)}}
+<li><a href="javascript:" onclick="changePage({{pageNow - 1}})">{{pageNow - 1}}</a></li>
+{{/if}}
+
+<li class="curPage"><a href="javascript:" onclick="changePage({{pageNow}})">{{pageNow}}</a></li>
+
+{{if(pageNow + 1 <= pageTotal)}}
+<li><a href="javascript:" onclick="changePage({{pageNow + 1}})">{{pageNow + 1}}</a></li>
+{{/if}}
+
+{{if(pageNow + 2 <= pageTotal)}}
+<li><a href="javascript:" onclick="changePage({{pageNow + 2}})">{{pageNow + 2}}</a></li>
+{{/if}}
+
+{{if pageNow < pageTotal}}
+<li class="threeword"><a href="javascript:" onclick="changePage({{pageNow + 1}})">下一页</a></li>
+{{/if}}
+
+<li class="twoword"><a href="javascript:" onclick="changePage({{pageTotal}})">末页</a></li>
+
+<li style="border: transparent;margin-top:3px;display: flex;"><span style="color: #ffc900;">{{pageNow}}</span>/{{pageTotal}}
+</li>
+</script>
+
+<script src="_service/nqfx_index.js"></script>
+<script src="_models/nqfx_index.js"></script>
+</body>
+</html>

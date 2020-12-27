@@ -1,0 +1,79 @@
+.tj_box2 {
+    border: 1px #e7e7e7 solid;
+    margin-top: 20px;
+}
+
+.tj_search {
+    width: 100%;
+    overflow: hidden;
+    text-align: left;
+    margin: 15px 0;
+}
+
+.tj_search span {
+    margin-left: 10px;
+    color: #555;
+    font-size: 12px;
+    margin-right: 15px;
+}
+
+.tj_search input {
+    height: 11px;
+    margin-right: 4px;
+    margin-left: 5px;
+}
+
+.tj_btn {
+    float: right;
+    margin-right: 10px;
+}
+
+.tj_btn span {
+    margin: 0;
+}
+
+.tj_box {
+    margin-top: 20px;
+    height: 500px;
+}
+
+/*table 区域*/
+.table_box .table3 {
+    width: 100%;
+}
+
+.table_box .table3 tr {
+    background: #f2f2f2;
+}
+
+.table_box .table3 td {
+    border: 1px solid #fff;
+    text-align: center;
+    color: #333;
+    height: 40px;
+}
+
+.table_box .table3 td img {
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.table_box .table3 thead td {
+    background: #21433f;
+    color: #fff;
+    height: 36px;
+    line-height: 36px;
+    font-size: 12px;
+    width: 16.66%;
+}
+
+.table_box .table3 tbody tr:nth-child(odd) td { /*隔行换色*/
+    background: #fff;
+    height: 36px;
+    font-size: 12px;
+    line-height: 36px;
+    color: #21433f;
+}
+
+
+

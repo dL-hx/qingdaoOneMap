@@ -1,0 +1,119 @@
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=2.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>青岛市绿色高产高效创建信息服务平台</title>
+    <script src="../_utils/config.js"></script>
+    <link rel="stylesheet" type="text/css" href="../global.css">
+    <script src="../../../vendors/jquery/jquery-1.12.4.js"></script>
+    <script src="../../../vendors/art-template/template-web.js"></script>
+    <!-- 引入 ECharts 文件 -->
+    <script src="../../../vendors/echarts/echarts-4.5.0.min.js"></script>
+    <script src="../_utils/utils.js"></script>
+    <script src="../_utils/template.js"></script>
+    <script src="../_utils/constants.js"></script>
+    <script src="../_utils/include.js"></script>
+
+</head>
+
+<style>
+    .center {
+        overflow-y: scroll;
+    }
+
+    .detail_title {
+        font-size: 26px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 60px;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+
+    .detail_message {
+        text-align: center;
+        color: #999;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .detail_message span {
+        text-align: center;
+        margin: 0 15px;
+        font-size: 14px;
+    }
+
+    .detail_main p {
+        text-align: left;
+        color: #333;
+        line-height: 36px;
+        font-size: 16px;
+        margin-bottom: 10px;
+
+    }
+
+    .detail_main p{
+        display: flex;
+        justify-content: center;
+    }
+
+    .detail_main p.download a {
+        color: #0dbaf3;
+        text-decoration: underline;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+    .nav a{
+        background: url(../../asset/return.png) no-repeat -10px -8px;
+        width: 80px;
+        height: 38px;
+        display: inline-block;
+        float: left;
+        margin: 10px;
+    }
+
+
+    .nav a:hover{
+        background-position: -10px -56px;
+    }
+</style>
+<body class="bg">
+<div id="header"></div>
+<div class="center w">
+    <nav class="nav">
+        <a href="nqfx_index.html"></a>
+    </nav>
+    <div class="nq_detail" style="padding-top: 15px;" id="nq_detail"></div>
+</div>
+<!--导入底部-->
+<div id="footer"></div>
+<script type="text/template" id="nqfxxqTpl">
+    <div class="box1">
+        <div class="detail_title">{{$data.name}}</div>
+        <div class="detail_message">
+            <span>文章来源：{{$data.fbname}}</span>|<span>{{$imports.formatDateToYear($data.fbtime)}}</span><span>{{$data.ly}}</span>|<span>浏览量：{{$data.fwl}}</span>
+        </div>
+        <div class="detail_main" style="
+             width: 800px;
+             margin: 0 auto;
+        ">
+            {{#$data.content}}
+        </div>
+    </div>
+</script>
+
+<script src="_service/nqfx_index.js"></script>
+<script src="_models/nqfx_index.js"></script>
+<script>
+    $(function () {
+        var id = window.location.search.split('=')[1]
+        requestDetail({id: id})
+    })
+</script>
+</body>
+</html>
